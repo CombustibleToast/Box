@@ -30,7 +30,6 @@
 			bottom: -50px;
 			left: 40%;
 		}
-
 		.slider{
 			-webkit-appearance: none;  /* Override default CSS styles */
 			appearance: none;
@@ -43,11 +42,9 @@
 			transition: opacity 1s;
 			border-radius: 5px;
 		}
-
 		.slider:hover{
 			opacity: .5;
 		}
-
 		.slider::-webkit-slider-thumb {
 			-webkit-appearance: none; /* Override default look */
 			appearance: none;
@@ -64,7 +61,6 @@
 			color: white;
 			font-size: 1.5em;
 		}
-
 		.selflessPromotion{
 			color: rgb(99, 99, 99);
 			font-size: .7em;
@@ -120,7 +116,6 @@
 		
 		for(var i = 0; ; i++){
 			h = window.innerHeight-120, w = window.innerWidth-120;
-
 			if(x < 0 || x > w)
 				x = w - 1;
 			if(y < 0 || y > h)
@@ -135,7 +130,7 @@
 				colorChange();
 				hits = hitTally(hits);
 				console.log("HIT: " + [x,y]);
-				if(checkCorner(x,y))
+				if(checkCorner(y,h))
 					cornerHits = cornerTally(cornerHits);
 			}
 			if(y <= 0 || y >= h){
@@ -182,7 +177,6 @@
 			var arg = Math.floor(Math.random()*16);
 			switch(arg){
 				case 10: a.push("A"); break;
-				case 10: a.push("A"); break;
 				case 11: a.push("B"); break;
 				case 12: a.push("C"); break;
 				case 13: a.push("D"); break;
@@ -195,10 +189,11 @@
 		return toString(a);
 	}
 	
-	function checkCorner(x,y){
-		if(!(Math.abs(x-y) <= 10))
-			return false;
-		return true;
+	function checkCorner(y,h){
+		var leniency = 10;
+		if(y < leniency || Math.abs(y-h) < leniency)
+			return true;
+		return false;
 	}
 
 	function cornerTally(cornerHits){
@@ -220,6 +215,7 @@
 			re += a[i];
 		return re;
 	}
+
 	function getSpeed(){
 		var re = document.getElementById("slider").value;
 		if(re < 0)
@@ -237,6 +233,7 @@
 			return;
 		}
 	}
+	
 	function sleep(ms){
 		return new Promise(resolve => setTimeout(resolve,ms));
 	}
