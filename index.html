@@ -230,6 +230,8 @@
 	}
 
 	function diminishBoost(boost){
+		if(boost >= 30)
+			boost = 30;
 		if(boost == 0)
 			return boost;
 		return boost-0.1;
