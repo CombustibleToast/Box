@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 
 <head>
-	<title> DVD ScreenSaver </title>
+	<title> DVD Screensaver </title>
+
 	<style id='else'>
 		.box{
 			position:fixed;
@@ -124,7 +125,7 @@
 			
 			var loc = relocate(style,dx,dy,x,y);
 			x = loc[0], y = loc[1];
-			speed = getSpeed();
+			speed = getSpeed() + speedBoost;
 			
 			if(x <= 0 || x >= w){
 				dx = !dx;
