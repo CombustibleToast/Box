@@ -126,6 +126,7 @@
 			var loc = relocate(style,dx,dy,x,y);
 			x = loc[0], y = loc[1];
 			speed = getSpeed() + parseInt(speedBoost);
+			//console.log({speed});
 			
 			if(x <= 0 || x >= w){
 				dx = !dx;
@@ -134,7 +135,7 @@
 				console.log("HIT: " + [x,y]);
 				if(checkCorner(y,h)){
 					cornerHits = cornerTally(cornerHits);
-					speedBoost = 30;
+					//speedBoost = 30;
 				}
 			}
 			if(y <= 0 || y >= h){
