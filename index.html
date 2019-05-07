@@ -113,7 +113,7 @@
 		var h = window.innerHeight-100, w = window.innerWidth-100;
 		var x = Math.floor(Math.random()*(w-20)+10), y = Math.floor(Math.random()*(h-20)+1);
 		var dx = Math.floor(Math.random()*2) == 1, dy = Math.floor(Math.random()*2) == 1;
-		var hits = 0, cornerHits = 0, speed = 0; speedBoost = 0;
+		var hits = 0, cornerHits = 0, speed = 0; speedBoost = 0.0;
 		colorChange();
 		
 		for(var i = 0; ; i++){
@@ -125,7 +125,7 @@
 			
 			var loc = relocate(style,dx,dy,x,y);
 			x = loc[0], y = loc[1];
-			speed = getSpeed() + speedBoost;
+			speed = getSpeed() + parseInt(speedBoost);
 			
 			if(x <= 0 || x >= w){
 				dx = !dx;
@@ -232,7 +232,7 @@
 	function diminishBoost(boost){
 		if(boost == 0)
 			return boost;
-		return boost-1;
+		return boost-0.1;
 	}
 	
 	async function wait(speed, i){
