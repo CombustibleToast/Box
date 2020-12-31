@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+
+<body style="background-color:black">
+<font id='font' color='limegreen' face='Courier' size='7'>
+HACKING IN PROGRESS...
+
+<div id='user'></div>
+<div id='pass'></div>
+
+</font>
+</body>
+
+
+
+<script id='script'>
+	//Hello, World!
+	main();
+	
+	async function main(){
+		var a = new Array();
+		var b = toArray(generatePassword(Math.floor((Math.random()*20)+10)));
+		
+		var c = new Array();
+		var d = toArray("Username");
+		var passI = 0, userI = 0;
+		var start = Date.now();
+		while(passI != -1 || userI != -1){
+			passI = brute(a,b,passI,"Password","pass");
+			userI = brute(c,d,userI,"Username","user");
+			await sleep(1);
+		}
+		
+		
+		var time = parseFloat(Date.now() - start) / 1000;
+		printa("<br>Done.", "pass");
+		printa(time + " seconds elapsed.", "pass");
+	}
+	
+	function brute(arg, target, i, name, div){
+		if(i == -1)
+			return -1;
+		if(arg[i] != target[i]){
+			arg[i] = String.fromCharCode(Math.floor(Math.random() * 500));
+			clearPage(div);
+			printa(name+ ": " + toString(arg), div);
+			return i;
+		}
+		else{
+			if(arg == target)
+				return -1;
+			return i+1;
+		}
+	}
+	
+	function printa(a, divId){
+		var div = document.getElementById(divId);
+		var p = document.createElement("p");
+		p.appendChild(document.createTextNode(a));
+		p.setAttribute("id","output");
+		div.appendChild(p);
+	}
+	
+	function clearPage(id){
+		var parent = document.getElementById(id);
+		while(parent.firstChild)
+				parent.removeChild(parent.firstChild);
+	}
+	
+	function toString(a){
+		var re = new String();
+		for(var i = 0; i < a.length; i++)
+			re += a[i];
+		return re;
+	}
+	
+	function toArray(arg){
+		var re = new Array();
+		for(var i = 0; i < arg.length; i++)
+			re.push(arg.substring(i,i+1));
+		return re;
+	}
+	
+	function fill(){
+		var chars = [];
+		for(var i = 0; i < 10; i++)
+			chars.push(i);
+		for(var i = 65; i <= 90; i++)
+			chars.push(String.fromCharCode(i));
+			
+		for(var i = 97; i <= 122; i++)
+			chars.push(String.fromCharCode(i));
+			
+		chars = chars.concat(['<','>','!','\\','\"','#','$','%','&','/','(',')','*','+','-','.',':',';','=','@','[',']','^','_','`','|','~','?']);
+		return chars;		
+	}
+	function generatePassword(length){
+		var chars = fill();
+		var pass = "";
+		for(var i = 0; i < length; i++)
+			pass += chars[Math.floor(Math.random()*(chars.length))];
+		return pass;
+	}
+	
+	function sleep(ms){
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+</script>
